@@ -1,4 +1,4 @@
-from dotenv import dotenv_values
+from dotenv import dotenv_values, set_key
 
 
 env_values = dotenv_values(".env")
@@ -12,6 +12,12 @@ class Config:
         self.OPENAI_MAX_TOKENS = env_values.get("OPENAI_MAX_TOKENS", 4096)
         self.SOURCE_DOC_URL = env_values.get("SOURCE_DOC_URL", "")
         self.SOURCE_DOCS_DIR = env_values.get("SOURCE_DOCS_DIR", "docs")
+        self.TARGET_SOURCE_FILE_PATH = env_values.get("TARGET_SOURCE_FILE_PATH", "")
+    
+    def set_env_key(self, env_key: str, env_value: str):
+        env_values[env_key] = env_value
+        set_key(".env", env_key, env_values[env_key])
+        #save_dotenv(".env", env_values)
 
 
 config = Config()

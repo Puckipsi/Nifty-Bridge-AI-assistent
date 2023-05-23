@@ -1,6 +1,7 @@
 import os
 import requests
 from urllib.parse import urlparse, unquote
+from config import config
 
 
 def save_file_from_url(url, folder_path):
@@ -14,6 +15,6 @@ def save_file_from_url(url, folder_path):
     with open(file_path, "wb") as file:
         file.write(response.content)
 
-    print(f"File saved: {file_path}")
+    config.set_env_key('TARGET_SOURCE_FILE_PATH', file_path)
 
-    return file_name
+
