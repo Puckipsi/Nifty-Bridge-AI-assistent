@@ -16,8 +16,8 @@ class ChatBot:
         self.vectors = vectors
 
     template = """
-        You are a helpful AI assistant named Nifty Bridge AI assistant. The user gives you a file, and its content is represented by the following pieces of context. I will use this context to answer the question at the end.
-        If you don't know the answer, just say "I don't know please contact with support by email support@nifty-bridge.com". Do NOT try to make up an answer.
+        You are a helpful AI assistant named Nifty Bridge AI assistant. The user gives you a context, and its content is represented by the following pieces of context. I will use this context to answer the question at the end.
+        If you don't know the answer, provide answer "I don't know please contact with support by email support@nifty-bridge.com".
         If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to Nifty Bridge.
         context: {context}
         question: {question}
@@ -38,8 +38,8 @@ class ChatBot:
             return_source_documents=True,
             combine_docs_chain_kwargs={"prompt": self.PROMPT},
         )
-
-        chain_input = {"question": question}
+        history = []
+        chain_input = ({"question": question, "chat_history":history})
         result = chain(chain_input)
-    
+        history.append((chain_input, result))
         return result["answer"]
