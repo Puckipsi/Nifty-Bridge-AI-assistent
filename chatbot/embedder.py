@@ -11,7 +11,7 @@ class FileProcessor(ABC):
         pass
 
     @abstractmethod
-    def load_file(self, file_path):
+    def load_file(self, text_splitter: list, file_path: str):
         pass
 
     @abstractmethod
@@ -27,10 +27,10 @@ class FileLoader:
 
 
 class EmbedderProcessor(FileProcessor):
-    def __init__(self, loader):
+    def __init__(self, loader: object):
         self.loader = loader
 
-    def split_into_chunks(self, file_path:str, chunk_size:int, chunk_overlap:int):
+    def split_into_chunks(self, file_path: str, chunk_size: int, chunk_overlap: int):
         print(
             f"Splitting file: {file_path} into chunks of size: {chunk_size} with chunk overlap: {chunk_overlap}"
         )
@@ -42,7 +42,7 @@ class EmbedderProcessor(FileProcessor):
 
         return text_splitter
 
-    def load_file(self, text_splitter, file_path: str):
+    def load_file(self, text_splitter: list, file_path: str):
         file_extension = file_path.split(".")[-1]
         if file_extension == "pdf":
             document = self.loader.load_pdf(text_splitter, file_path)
