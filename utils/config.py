@@ -18,7 +18,6 @@ class Config:
     def set_env_key(self, env_key: str, env_value: str):
         env_values[env_key] = env_value
         set_key(".env", env_key, env_values[env_key])
-        #save_dotenv(".env", env_values)
 
 
 config = Config()
