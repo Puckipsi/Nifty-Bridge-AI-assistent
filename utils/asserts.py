@@ -1,6 +1,6 @@
 import os
-from config import config
-from doc_saver import save_file_from_url
+from utils.config import config
+from utils.doc_saver import save_file_from_url
 
 
 class Verifier:
@@ -8,6 +8,11 @@ class Verifier:
     def openai_api_key_exists():
         api_key = config.OPENAI_API_KEY
         assert api_key, "OpenAI API key not found in .env file"
+
+    @staticmethod
+    def x_api_key_exists():
+        api_key = config.API_KEY
+        assert api_key, "API key for application not found in .env file"
 
     @staticmethod
     def source_doc_exists():
@@ -21,5 +26,10 @@ class Verifier:
             save_file_from_url(url=config.SOURCE_DOC_URL, folder_path=folder_path)
 
 
+def assert_startup():
+    ver = Verifier()
+    ver.x_api_key_exists()
+    ver.openai_api_key_exists()
+    ver.source_doc_exists()
 
 

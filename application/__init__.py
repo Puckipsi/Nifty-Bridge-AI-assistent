@@ -1,4 +1,8 @@
 from fastapi import FastAPI, APIRouter
+from utils.asserts import assert_startup
+
+
+assert_startup()
 
 app = FastAPI(title='Nifty Brifge AI assistant')
 

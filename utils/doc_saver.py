@@ -1,7 +1,7 @@
 import os
 import requests
 from urllib.parse import urlparse, unquote
-from config import config
+from utils.config import config
 
 
 def save_file_from_url(url, folder_path):
