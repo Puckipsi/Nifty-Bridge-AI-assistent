@@ -13,6 +13,7 @@ class Config:
         self.SOURCE_DOC_URL = env_values.get("SOURCE_DOC_URL", "")
         self.SOURCE_DOCS_DIR = env_values.get("SOURCE_DOCS_DIR", "docs")
         self.TARGET_SOURCE_FILE_PATH = env_values.get("TARGET_SOURCE_FILE_PATH", "")
+        self.API_KEY = env_values.get("API_KEY", "")
     
     def set_env_key(self, env_key: str, env_value: str):
         env_values[env_key] = env_value
